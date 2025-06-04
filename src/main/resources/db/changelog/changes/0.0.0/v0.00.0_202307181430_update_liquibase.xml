@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+	<changeSet id="v0.0.0" author="Camilla Moura" >
+		<comment>Adicionando as tabelas de agrupamento, produto_associado, negocio_sustentavel, account_style_caption</comment>
+		<sql>
+			<![CDATA[
+					
+				CREATE TABLE agrupamento (
+				    id UUID PRIMARY KEY,
+				    account_style VARCHAR(255) UNIQUE NOT NULL,
+				    account_style_accrue_type VARCHAR(255),
+				    account_style_consumption_accrue_method VARCHAR(255),
+				    account_style_cost_accrue_method VARCHAR(255)
+				);
+				
+				CREATE TABLE produto_associado (
+				    id UUID PRIMARY KEY,
+				    location VARCHAR(255) UNIQUE NOT NULL,
+				    location_account_ref VARCHAR(255),
+				    agrupamento_id UUID NOT NULL REFERENCES agrupamento(id)
+				);
+
+				CREATE TABLE negocio_sustentavel (
+				    id UUID PRIMARY KEY,
+				    account_number VARCHAR(255) UNIQUE NOT NULL,
+				    account_reference VARCHAR(255),
+				    produto_associado_id UUID NOT NULL REFERENCES produto_associado(id),
+				    cdl VARCHAR(255),
+				    segmento VARCHAR(255),
+				    validade_inicio TIMESTAMP,
+				    validade_fim TIMESTAMP
+				);
+				
+				CREATE TABLE account_style_caption (
+				    id UUID PRIMARY KEY,
+				    account_style_link VARCHAR(255) UNIQUE NOT NULL,
+				    account_style_caption VARCHAR(255) NOT NULL,
+				    account_subtype VARCHAR(255),
+				    account_number VARCHAR(255),
+				    account_reference VARCHAR(255),
+				    account_supplier VARCHAR(255),
+				    account_reader VARCHAR(255),
+				    record_start TIMESTAMP,
+				    record_end TIMESTAMP,
+				    record_data_quality VARCHAR(255),
+				    record_billing_type VARCHAR(255),
+				    record_subtype VARCHAR(255),
+				    record_entry_method VARCHAR(255),
+				    record_reference VARCHAR(255),
+				    record_invoice_number VARCHAR(255),
+				    
+				    -- campos adicionais dinâmicos
+				    account_style_field_1 TEXT,
+				    account_style_field_2 TEXT,
+				    account_style_field_3 TEXT,
+				    account_style_field_4 TEXT,
+				    account_style_field_5 TEXT,
+				    account_style_field_6 TEXT,
+				    account_style_field_7 TEXT,
+				    account_style_field_8 TEXT,
+				    account_style_field_9 TEXT,
+				    account_style_field_10 TEXT,
+				    account_style_field_11 TEXT,
+				    account_style_field_12 TEXT,
+				    account_style_field_13 TEXT,
+				    account_style_field_14 TEXT,
+				    account_style_field_15 TEXT,
+				    account_style_field_16 TEXT,
+				    account_style_field_17 TEXT,
+				    account_style_field_18 TEXT,
+				    account_style_field_19 TEXT,
+				    account_style_field_20 TEXT,
+				    account_style_field_21 TEXT,
+				    account_style_field_22 TEXT,
+				    account_style_field_23 TEXT,
+				    account_style_field_24 TEXT,
+				    account_style_field_25 TEXT,
+				    account_style_field_26 TEXT,
+				    account_style_field_27 TEXT,
+				    account_style_field_28 TEXT,
+				    account_style_field_29 TEXT,
+				    account_style_field_30 TEXT,
+				    account_style_field_31 TEXT,
+				    account_style_field_32 TEXT,
+				    account_style_field_33 TEXT,
+				    account_style_field_34 TEXT,
+				    account_style_field_35 TEXT,
+				    account_style_field_36 TEXT,
+				    account_style_field_37 TEXT,
+				    account_style_field_38 TEXT,
+				    account_style_field_39 TEXT,
+				    account_style_field_40 TEXT
+				);
+
+
+			]]>
+		</sql>
+		<rollback>
+
+		</rollback>
+	</changeSet>	
+	
+</databaseChangeLog>
