@@ -20,8 +20,7 @@ public class UploadController {
 	//@PostApiResponse
 	@Transactional
 	public void upload(@RequestParam MultipartFile vmExcel) throws IOException {
-//		InventoryUpload inventory = inventoryService.parseAndSaveInventoryUpload(vmExcel, name);
-//		inventoryService.saveLocalFile(vmExcel, name, inventory);
+
 	}
 
 }
